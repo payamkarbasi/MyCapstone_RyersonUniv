@@ -229,7 +229,7 @@ NfoldCross <- function(foldNum){
     mc_test <- fitMarkovChain(testCLS, order=1, verbose = T )
     
     #Clustering Dataset based on Clickstream package
-    clusters <- getConsensusClusters(trainCLS, testCLS, maxIterations=10, optimalProbMean=0.15, range = 0.50, centresMin = 6, clusterCentresRange = 0, order = 1, takeHighest = T, verbose = T)
+    clusters <- getConsensusClusters(trainCLS, testCLS, maxIterations=4, optimalProbMean=0.20, range = 0.50, centresMin = 6, clusterCentresRange = 0, order = 1, takeHighest = T, verbose = T)
     
     #summary(clusters)   #Shows the Details of Generated Clusters
     
@@ -339,6 +339,8 @@ par(las=3, oma=c(5,0,1,0))
 barplot(as.matrix(finalPlot), main="The First-Level Clicks Probabilities", ylab = "Percenages", cex.lab = 1.5, cex.main = 1.4, beside=TRUE, col=rainbow(FOLDS), bty="L")
 par(xpd=TRUE)
 legend("topleft", c("Test1","Test2","Test3","Test4"), cex=0.6, fill=rainbow(FOLDS), horiz = F, inset = c(0.03,-0.1))
+
+boxplot(finalTable[,-ncol(finalTable)])
 
 #Validation Tests: If our dataset is considered Time-dependent, then folds are NOT-PAIRED, and Kruskal Wallis Test is advised:
 ### Kruskal Wallis Test Model, having p-value>0.05 result, confirms the H0 assumption that results are identical among N-Folds:
